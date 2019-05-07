@@ -3,43 +3,44 @@ import './App.css';
 import Chart from './components/Chart.js';
 
 class App extends Component {
-  constructor(){
+  constructor() {
     super();
     this.state = {
-      date:null
+      date: null,
+      tides: {}
     }
   }
 
-  componentWillMount(){
-    var date = new Date('August 19, 1975 23:15:30');
+  componentWillMount() {
+    var date = new Date();
     this.setState({
-      date:date
+      date: date
+    });
+    this.getTides();
+  }
+
+  getTides() {
+    this.setState({
+      tides: {
+        calculate: [
+          12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12,
+          12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12
+        ],
+        predict: [
+          15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15,
+          15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15
+        ]
+      }
     });
   }
 
   render() {
     return (
       <div className="App">
-        {/* <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-          
-        </header> */}
-        <Chart date={this.state.date} />
+        <Chart date={this.state.date} tides={this.state.tides} />
       </div>
     );
   }
-  
 }
 
 export default App;

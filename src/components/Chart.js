@@ -1,28 +1,29 @@
 import React, { Component } from 'react'
 import CanvasJS from './lib/canvasjs.min'
-import { ninvoke } from 'q';
+import './Chart.css';
 
 
 class Chart extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			date: props.date
+			date: props.date,
+			tides: props.tides
 		}
 	}
 
 	formatDate(date) {
-		if(date == null) {
+		if (date == null) {
 			return ""
 		}
 		var d = new Date(date),
 			month = '' + (d.getMonth() + 1),
 			day = '' + d.getDate(),
 			year = d.getFullYear();
-	
+
 		if (month.length < 2) month = '0' + month;
 		if (day.length < 2) day = '0' + day;
-	
+
 		return [year, month, day].join('-');
 	}
 
@@ -30,10 +31,14 @@ class Chart extends Component {
 		var chart = new CanvasJS.Chart("chartContainer", {
 			animationEnabled: true,
 			title: {
-				text: "Tide ( " + this.formatDate(this.state.date) + " )"
+				text: this.formatDate(this.state.date)
 			},
 			axisY: {
-				title: "Number of Customers",
+				title: "潮位",
+				includeZero: false
+			},
+			axisX: {
+				title: "時間",
 				includeZero: false
 			},
 			toolTip: {
@@ -41,40 +46,64 @@ class Chart extends Component {
 			},
 			data: [{
 				type: "spline",
-				name: "2016",
+				name: "予測潮位（機械学習）",
 				showInLegend: true,
 				dataPoints: [
-					{ y: 155, label: "Jan" },
-					{ y: 150, label: "Feb" },
-					{ y: 152, label: "Mar" },
-					{ y: 148, label: "Apr" },
-					{ y: 142, label: "May" },
-					{ y: 150, label: "Jun" },
-					{ y: 146, label: "Jul" },
-					{ y: 149, label: "Aug" },
-					{ y: 153, label: "Sept" },
-					{ y: 158, label: "Oct" },
-					{ y: 154, label: "Nov" },
-					{ y: 150, label: "Dec" }
+					{ y: this.state.tides.predict[0], label: "0" },
+					{ y: this.state.tides.predict[1], label: "1" },
+					{ y: this.state.tides.predict[2], label: "2" },
+					{ y: this.state.tides.predict[3], label: "3" },
+					{ y: this.state.tides.predict[4], label: "4" },
+					{ y: this.state.tides.predict[5], label: "5" },
+					{ y: this.state.tides.predict[6], label: "6" },
+					{ y: this.state.tides.predict[7], label: "7" },
+					{ y: this.state.tides.predict[8], label: "8" },
+					{ y: this.state.tides.predict[9], label: "9" },
+					{ y: this.state.tides.predict[10], label: "10" },
+					{ y: this.state.tides.predict[11], label: "11" },
+					{ y: this.state.tides.predict[12], label: "12" },
+					{ y: this.state.tides.predict[13], label: "13" },
+					{ y: this.state.tides.predict[14], label: "14" },
+					{ y: this.state.tides.predict[15], label: "15" },
+					{ y: this.state.tides.predict[16], label: "16" },
+					{ y: this.state.tides.predict[17], label: "17" },
+					{ y: this.state.tides.predict[18], label: "18" },
+					{ y: this.state.tides.predict[19], label: "19" },
+					{ y: this.state.tides.predict[20], label: "20" },
+					{ y: this.state.tides.predict[21], label: "21" },
+					{ y: this.state.tides.predict[22], label: "22" },
+					{ y: this.state.tides.predict[23], label: "23" }
 				]
 			},
 			{
 				type: "spline",
-				name: "2017",
+				name: "天文潮位",
 				showInLegend: true,
 				dataPoints: [
-					{ y: 172, label: "Jan" },
-					{ y: 173, label: "Feb" },
-					{ y: 175, label: "Mar" },
-					{ y: 172, label: "Apr" },
-					{ y: 162, label: "May" },
-					{ y: 165, label: "Jun" },
-					{ y: 172, label: "Jul" },
-					{ y: 168, label: "Aug" },
-					{ y: 175, label: "Sept" },
-					{ y: 170, label: "Oct" },
-					{ y: 165, label: "Nov" },
-					{ y: 169, label: "Dec" }
+					{ y: this.state.tides.calculate[0], label: "0" },
+					{ y: this.state.tides.calculate[1], label: "1" },
+					{ y: this.state.tides.calculate[2], label: "2" },
+					{ y: this.state.tides.calculate[3], label: "3" },
+					{ y: this.state.tides.calculate[4], label: "4" },
+					{ y: this.state.tides.calculate[5], label: "5" },
+					{ y: this.state.tides.calculate[6], label: "6" },
+					{ y: this.state.tides.calculate[7], label: "7" },
+					{ y: this.state.tides.calculate[8], label: "8" },
+					{ y: this.state.tides.calculate[9], label: "9" },
+					{ y: this.state.tides.calculate[10], label: "10" },
+					{ y: this.state.tides.calculate[11], label: "11" },
+					{ y: this.state.tides.calculate[12], label: "12" },
+					{ y: this.state.tides.calculate[13], label: "13" },
+					{ y: this.state.tides.calculate[14], label: "14" },
+					{ y: this.state.tides.calculate[15], label: "15" },
+					{ y: this.state.tides.calculate[16], label: "16" },
+					{ y: this.state.tides.calculate[17], label: "17" },
+					{ y: this.state.tides.calculate[18], label: "18" },
+					{ y: this.state.tides.calculate[19], label: "19" },
+					{ y: this.state.tides.calculate[20], label: "20" },
+					{ y: this.state.tides.calculate[21], label: "21" },
+					{ y: this.state.tides.calculate[22], label: "22" },
+					{ y: this.state.tides.calculate[23], label: "23" }
 				]
 			}]
 		});
@@ -82,8 +111,7 @@ class Chart extends Component {
 	}
 	render() {
 		return (
-			<div id="chartContainer" style={{ height: 100 + "%", width: 90 + "%" }}>
-			</div>
+			<div id="chartContainer"></div>
 		);
 	}
 }
