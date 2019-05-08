@@ -1,4 +1,0 @@
-[build]
-base = "seetide/"
-publish = "seetide/build/"
-command = "yarn build"
