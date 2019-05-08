@@ -28,6 +28,15 @@ class Chart extends Component {
 	}
 
 	componentDidMount() {
+		if (this.state.tides.observe.length === 0) {
+			return
+		}
+		if (this.state.tides.predict.length === 0) {
+			return
+		}
+		if (this.state.tides.calculate.length === 0) {
+			return
+		}
 		var chart = new CanvasJS.Chart("chartContainer", {
 			animationEnabled: true,
 			title: {
@@ -45,6 +54,37 @@ class Chart extends Component {
 				shared: true
 			},
 			data: [{
+				type: "spline",
+				name: "実測値",
+				showInLegend: true,
+				dataPoints: [
+					{ y: this.state.tides.observe[0], label: "0" },
+					{ y: this.state.tides.observe[1], label: "1" },
+					{ y: this.state.tides.observe[2], label: "2" },
+					{ y: this.state.tides.observe[3], label: "3" },
+					{ y: this.state.tides.observe[4], label: "4" },
+					{ y: this.state.tides.observe[5], label: "5" },
+					{ y: this.state.tides.observe[6], label: "6" },
+					{ y: this.state.tides.observe[7], label: "7" },
+					{ y: this.state.tides.observe[8], label: "8" },
+					{ y: this.state.tides.observe[9], label: "9" },
+					{ y: this.state.tides.observe[10], label: "10" },
+					{ y: this.state.tides.observe[11], label: "11" },
+					{ y: this.state.tides.observe[12], label: "12" },
+					{ y: this.state.tides.observe[13], label: "13" },
+					{ y: this.state.tides.observe[14], label: "14" },
+					{ y: this.state.tides.observe[15], label: "15" },
+					{ y: this.state.tides.observe[16], label: "16" },
+					{ y: this.state.tides.observe[17], label: "17" },
+					{ y: this.state.tides.observe[18], label: "18" },
+					{ y: this.state.tides.observe[19], label: "19" },
+					{ y: this.state.tides.observe[20], label: "20" },
+					{ y: this.state.tides.observe[21], label: "21" },
+					{ y: this.state.tides.observe[22], label: "22" },
+					{ y: this.state.tides.observe[23], label: "23" }
+				]
+			},
+			{
 				type: "spline",
 				name: "予測潮位（機械学習）",
 				showInLegend: true,

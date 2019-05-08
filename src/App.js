@@ -7,7 +7,11 @@ class App extends Component {
     super();
     this.state = {
       date: null,
-      tides: {}
+      tides: {
+        observe: [],
+        predict: [],
+        calculate: []
+      }
     }
   }
 
@@ -16,22 +20,60 @@ class App extends Component {
     this.setState({
       date: date
     });
-    this.getTides();
+    this.getTides('2017-01-01 12:12:32');
   }
 
-  getTides() {
-    this.setState({
-      tides: {
-        calculate: [
-          12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12,
-          12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12
-        ],
-        predict: [
-          15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15,
-          15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15
-        ]
+  getTides(date) {
+    var url_observe = "https://tide-api-ezaki-lab.herokuapp.com/observe"
+    fetch(url_observe, {
+      method: 'POST',
+      body: JSON.stringify(date),
+      headers: {
+        'Content-Type': 'application/json'
       }
-    });
+    }).then(res => res.json())
+      .then(response => {
+        this.setState({
+          tides: {
+            observe: response['tides']
+          }
+        });
+      })
+      .catch(error => console.error('Error:', error));
+
+    var url_predict = "https://tide-api-ezaki-lab.herokuapp.com/predict"
+    fetch(url_predict, {
+      method: 'POST',
+      body: JSON.stringify(date),
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    }).then(res => res.json())
+      .then(response => {
+        this.setState({
+          tides: {
+            predict: response['tides']
+          }
+        });
+      })
+      .catch(error => console.error('Error:', error));
+
+    var url_calculate = "https://tide-api-ezaki-lab.herokuapp.com/calculate"
+    fetch(url_calculate, {
+      method: 'POST',
+      body: JSON.stringify(date),
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    }).then(res => res.json())
+      .then(response => {
+        this.setState({
+          tides: {
+            calculate: response['tides']
+          }
+        });
+      })
+      .catch(error => console.error('Error:', error));
   }
 
   render() {
