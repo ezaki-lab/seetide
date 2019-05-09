@@ -1,7 +1,9 @@
 import React, { Component } from 'react'
 import './Chart.css';
 
-var CanvasJS = require('./lib/canvasjs.min.js');
+// var CanvasJS = require('canvasjs.min.js');
+import CanvasJSReact from './lib/canvasjs.react';
+var CanvasJSChart = CanvasJSReact.CanvasJSChart;
 
 
 class Chart extends Component {
@@ -28,8 +30,8 @@ class Chart extends Component {
 		return [year, month, day].join('-');
 	}
 
-	componentDidMount() {
-		var chart = new CanvasJS.Chart("chartContainer", {
+	render() {
+		const options = {
 			animationEnabled: true,
 			title: {
 				text: this.formatDate(this.state.date)
@@ -138,12 +140,12 @@ class Chart extends Component {
 					{ y: this.state.tides.calculate[23], label: "23" }
 				]
 			}]
-		});
-		chart.render();
-	}
-	render() {
+		};
 		return (
-			<div id="chartContainer"></div>
+			<div>
+				<h1>React Line Chart</h1>
+				<CanvasJSChart options={options} />
+			</div>
 		);
 	}
 }
