@@ -29,9 +29,6 @@ class Chart extends Component {
 	}
 
 	componentDidMount() {
-		console.log("obs", this.state.tides.observe);
-		console.log("pre", this.state.tides.predict);
-		console.log("cal", this.state.tides.calculate);
 		var chart = new CanvasJS.Chart("chartContainer", {
 			animationEnabled: true,
 			title: {
