@@ -21,6 +21,23 @@ class App extends Component {
       date: date
     });
     this.getTides('2017-01-01 12:12:32');
+
+    // this.setState({
+    //   tides: {
+    //     observe: [
+    //       12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 
+    //       12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12
+    //     ],
+    //     predict: [
+    //       12, 12, 12, 12, 13, 12, 12, 12, 12, 12, 12, 12, 
+    //       12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12
+    //     ],
+    //     calculate: [
+    //       12, 12, 12, 12, 12, 5, 12, 12, 12, 12, 12, 12, 
+    //       12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12
+    //     ]
+    //   }
+    // })
   }
 
   getTides(date) {
@@ -33,6 +50,7 @@ class App extends Component {
       }
     }).then(res => res.json())
       .then(response => {
+        console.log(response)
         this.setState({
           tides: {
             observe: response['tides']

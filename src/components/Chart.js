@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
-import CanvasJS from './lib/canvasjs.min'
 import './Chart.css';
+
+var CanvasJS = require('./lib/canvasjs.min');
 
 
 class Chart extends Component {
@@ -28,15 +29,15 @@ class Chart extends Component {
 	}
 
 	componentDidMount() {
-		if (this.state.tides.observe.length === 0) {
-			return
-		}
-		if (this.state.tides.predict.length === 0) {
-			return
-		}
-		if (this.state.tides.calculate.length === 0) {
-			return
-		}
+		// if (this.state.tides.observe.length === 0) {
+		// 	return
+		// }
+		// if (this.state.tides.predict.length === 0) {
+		// 	return
+		// }
+		// if (this.state.tides.calculate.length === 0) {
+		// 	return
+		// }
 		var chart = new CanvasJS.Chart("chartContainer", {
 			animationEnabled: true,
 			title: {
