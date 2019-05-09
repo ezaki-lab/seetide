@@ -29,15 +29,9 @@ class Chart extends Component {
 	}
 
 	componentDidMount() {
-		// if (this.state.tides.observe.length === 0) {
-		// 	return
-		// }
-		// if (this.state.tides.predict.length === 0) {
-		// 	return
-		// }
-		// if (this.state.tides.calculate.length === 0) {
-		// 	return
-		// }
+		console.log("obs", this.state.tides.observe)
+		console.log("pre", this.state.tides.predict)
+		console.log("cal", this.state.tides.calculate)
 		var chart = new CanvasJS.Chart("chartContainer", {
 			animationEnabled: true,
 			title: {

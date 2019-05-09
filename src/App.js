@@ -8,9 +8,9 @@ class App extends Component {
     this.state = {
       date: null,
       tides: {
-        observe: [],
-        predict: [],
-        calculate: []
+        observe: null,
+        predict: null,
+        calculate: null
       }
     }
   }
@@ -20,7 +20,6 @@ class App extends Component {
     this.setState({
       date: date
     });
-    this.getTides('2017-01-01 12:12:32');
 
     // this.setState({
     //   tides: {
@@ -40,20 +39,26 @@ class App extends Component {
     // })
   }
 
+  componentDidMount() {
+    this.getTides('2017-01-01 12:12:32');
+  }
+
   getTides(date) {
     var url_observe = "https://tide-api-ezaki-lab.herokuapp.com/observe"
     fetch(url_observe, {
       method: 'POST',
-      body: JSON.stringify(date),
+      body: JSON.stringify({'date':date}),
       headers: {
         'Content-Type': 'application/json'
       }
     }).then(res => res.json())
       .then(response => {
-        console.log(response)
+        console.log("fetched observe tides", response['tides'])
         this.setState({
           tides: {
-            observe: response['tides']
+            observe: response['tides'],
+            predict: this.state.tides.predict,
+            calculate: this.state.tides.calculate
           }
         });
       })
@@ -62,15 +67,18 @@ class App extends Component {
     var url_predict = "https://tide-api-ezaki-lab.herokuapp.com/predict"
     fetch(url_predict, {
       method: 'POST',
-      body: JSON.stringify(date),
+      body: JSON.stringify({'date':date}),
       headers: {
         'Content-Type': 'application/json'
       }
     }).then(res => res.json())
       .then(response => {
+        console.log("fetched predict tides", response['tides'])
         this.setState({
           tides: {
-            predict: response['tides']
+            observe: this.state.tides.observe,
+            predict: response['tides'],
+            calculate: this.state.tides.calculate
           }
         });
       })
@@ -79,14 +87,17 @@ class App extends Component {
     var url_calculate = "https://tide-api-ezaki-lab.herokuapp.com/calculate"
     fetch(url_calculate, {
       method: 'POST',
-      body: JSON.stringify(date),
+      body: JSON.stringify({'date':date}),
       headers: {
         'Content-Type': 'application/json'
       }
     }).then(res => res.json())
       .then(response => {
+        console.log("fetched calculate tides", response['tides'])
         this.setState({
           tides: {
+            observe: this.state.tides.observe,
+            predict: this.state.tides.predict,
             calculate: response['tides']
           }
         });
@@ -97,7 +108,10 @@ class App extends Component {
   render() {
     return (
       <div className="App">
+      {
+        this.state.date && this.state.tides.observe && this.state.tides.predict && this.state.tides.calculate &&
         <Chart date={this.state.date} tides={this.state.tides} />
+      }
       </div>
     );
   }
