@@ -16,27 +16,10 @@ class App extends Component {
   }
 
   componentWillMount() {
-    var date = new Date();
+    var date = new Date('2017-01-01');
     this.setState({
       date: date
     });
-
-    // this.setState({
-    //   tides: {
-    //     observe: [
-    //       12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 
-    //       12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12
-    //     ],
-    //     predict: [
-    //       12, 12, 12, 12, 13, 12, 12, 12, 12, 12, 12, 12, 
-    //       12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12
-    //     ],
-    //     calculate: [
-    //       12, 12, 12, 12, 12, 5, 12, 12, 12, 12, 12, 12, 
-    //       12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12
-    //     ]
-    //   }
-    // })
   }
 
   componentDidMount() {
