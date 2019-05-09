@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import './Chart.css';
 
-var CanvasJS = require('./lib/canvasjs.min');
+var CanvasJS = require('./lib/canvasjs.min.js');
 
 
 class Chart extends Component {
