@@ -143,7 +143,6 @@ class Chart extends Component {
 		};
 		return (
 			<div>
-				<h1>React Line Chart</h1>
 				<CanvasJSChart options={options} />
 			</div>
 		);
