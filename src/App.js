@@ -20,7 +20,7 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-      <STChart date={this.state.date}/>
+        <STChart date={this.state.date} />
       </div>
     );
   }

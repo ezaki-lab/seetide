@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 
-import Chart from '../Chart/Chart.js'
-import LoadingSpinner from '../LoadingSpinner/LoadingSpinner.js';
+import Chart from './Chart/Chart.js'
+import LoadingSpinner from './LoadingSpinner/LoadingSpinner.js';
 
 
 class STChart extends Component {
