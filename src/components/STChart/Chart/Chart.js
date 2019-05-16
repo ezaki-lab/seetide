@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import './Chart.css';
 
-// var CanvasJS = require('canvasjs.min.js');
 import CanvasJSReact from './lib/canvasjs.react';
 var CanvasJSChart = CanvasJSReact.CanvasJSChart;
 
@@ -143,7 +142,6 @@ class Chart extends Component {
 		};
 		return (
 			<div>
-				<h1>React Line Chart</h1>
 				<CanvasJSChart options={options} />
 			</div>
 		);
