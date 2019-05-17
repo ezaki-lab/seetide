@@ -6,6 +6,7 @@
     "canvasjs": "^1.8.1",
     "react": "^16.8.6",
     "react-canvas-js": "^1.0.1",
+    "react-day-picker": "^7.3.0",
     "react-dom": "^16.8.6",
     "react-scripts": "3.0.0",
     "react-spinner-material": "^1.1.1"
