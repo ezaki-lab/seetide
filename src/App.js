@@ -14,9 +14,9 @@ class App extends Component {
   }
 
   componentWillMount() {
-    var lastyear = new Date(new Date().setFullYear(new Date().getFullYear() - 1));
+    var today = new Date();
     this.setState({
-      date: lastyear
+      date: today
     });
   }
 

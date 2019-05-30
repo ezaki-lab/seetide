@@ -65,90 +65,126 @@ class STChart extends Component {
         this.setState({
             requestStatus: RequestStateTypes.loading
         });
-        
+
         var url_observe = "https://tide-api-ezaki-lab.herokuapp.com/observe"
+        var tides_observe = [];
         fetch(url_observe, {
             method: 'POST',
             body: JSON.stringify({ 'date': date }),
             headers: {
                 'Content-Type': 'application/json'
             }
-        }).then(res => res.json())
-            .then(response => {
-                console.log("fetched tides (observe)")
-                this.setState({
-                    pendingTides: {
-                        observe: response['tides'],
-                        predict: this.state.pendingTides.predict,
-                        calculate: this.state.pendingTides.calculate
-                    }
-                });
-                if (this.state.pendingTides.observe != null &&
-                    this.state.pendingTides.predict != null &&
-                    this.state.pendingTides.calculate != null) {
-                    this.setState({
-                        tides: this.state.pendingTides,
-                        requestStatus: RequestStateTypes.success
-                    });
+        }).then(response => {
+            if (response.status === 201) {
+                return response.json();
+            }
+        }).then(json => {
+            if (json != null) {
+                console.log("success to fetch tides (observe)");
+                tides_observe = json['tides'];
+            }
+            else {
+                console.error("failed to fetch tides (observe)")
+            }
+        }).catch(error => {
+            console.error('Error:', error);
+        }).finally( () => {
+            this.setState({
+                pendingTides: {
+                    observe: tides_observe,
+                    predict: this.state.pendingTides.predict,
+                    calculate: this.state.pendingTides.calculate
                 }
-            })
-            .catch(error => console.error('Error:', error));
+            });
+            if (this.state.pendingTides.observe != null &&
+                this.state.pendingTides.predict != null &&
+                this.state.pendingTides.calculate != null) {
+                this.setState({
+                    tides: this.state.pendingTides,
+                    requestStatus: RequestStateTypes.success
+                });
+            }
+        });
 
         var url_predict = "https://tide-api-ezaki-lab.herokuapp.com/predict"
+        var tides_predict = [];
         fetch(url_predict, {
             method: 'POST',
             body: JSON.stringify({ 'date': date }),
             headers: {
                 'Content-Type': 'application/json'
             }
-        }).then(res => res.json())
-            .then(response => {
-                console.log("fetched tides (predict)")
-                this.setState({
-                    pendingTides: {
-                        observe: this.state.pendingTides.observe,
-                        predict: response['tides'],
-                        calculate: this.state.pendingTides.calculate
-                    }
-                });
-                if (this.state.pendingTides.observe != null &&
-                    this.state.pendingTides.predict != null &&
-                    this.state.pendingTides.calculate != null) {
-                    this.setState({
-                        tides: this.state.pendingTides,
-                        requestStatus: RequestStateTypes.success
-                    });
+        }).then(response => {
+            if (response.status === 201) {
+                return response.json();
+            }
+        }).then(json => {
+            if (json != null) {
+                console.log("success to fetch tides (predict)");
+                tides_predict = json['tides'];
+            }
+            else {
+                console.error("failed to fetch tides (predict)")
+            }
+        }).catch(error => {
+            console.error('Error:', error);
+        }).finally( () => {
+            this.setState({
+                pendingTides: {
+                    observe: this.state.pendingTides.observe,
+                    predict: tides_predict,
+                    calculate: this.state.pendingTides.calculate
                 }
-            })
-            .catch(error => console.error('Error:', error));
+            });
+            if (this.state.pendingTides.observe != null &&
+                this.state.pendingTides.predict != null &&
+                this.state.pendingTides.calculate != null) {
+                this.setState({
+                    tides: this.state.pendingTides,
+                    requestStatus: RequestStateTypes.success
+                });
+            }
+        });
 
         var url_calculate = "https://tide-api-ezaki-lab.herokuapp.com/calculate"
+        var tides_calculate = [];
         fetch(url_calculate, {
             method: 'POST',
             body: JSON.stringify({ 'date': date }),
             headers: {
                 'Content-Type': 'application/json'
             }
-        }).then(res => res.json())
-            .then(response => {
-                console.log("fetched tides (calculate)")
-                this.setState({
-                    pendingTides: {
-                        observe: this.state.pendingTides.observe,
-                        predict: this.state.pendingTides.predict,
-                        calculate: response['tides']
-                    }
-                });
-                if (this.state.pendingTides.observe != null &&
-                    this.state.pendingTides.predict != null &&
-                    this.state.pendingTides.calculate != null) {
-                    this.setState({
-                        tides: this.state.pendingTides,
-                        requestStatus: RequestStateTypes.success
-                    });
+        }).then(response => {
+            if (response.status === 201) {
+                return response.json();
+            }
+        }).then(json => {
+            if (json != null) {
+                console.log("success to fetch tides (calculate)");
+                tides_calculate = json['tides'];
+            }
+            else {
+                console.error("failed to fetch tides (calculate)")
+            }
+        }).catch(error => {
+            console.error('Error:', error);
+        }).finally( () => {
+            this.setState({
+                pendingTides: {
+                    observe: this.state.pendingTides.observe,
+                    predict: this.state.pendingTides.predict,
+                    calculate: tides_calculate
                 }
-            })
-            .catch(error => console.error('Error:', error));
+            });
+            if (this.state.pendingTides.observe != null &&
+                this.state.pendingTides.predict != null &&
+                this.state.pendingTides.calculate != null) {
+                this.setState({
+                    tides: this.state.pendingTides,
+                    requestStatus: RequestStateTypes.success
+                });
+            }
+        });
     }
 
     render() {
