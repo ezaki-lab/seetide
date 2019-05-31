@@ -14,9 +14,9 @@ class App extends Component {
   }
 
   componentWillMount() {
-    var lastyear = new Date(new Date().setFullYear(new Date().getFullYear() - 1));
+    var today = new Date();
     this.setState({
-      date: lastyear
+      date: today
     });
   }
 
@@ -37,6 +37,7 @@ class App extends Component {
               fontSize: 25
              },
           }}
+          readOnly={true}
         />
         <STChart date={this.state.date} />
       </div>
