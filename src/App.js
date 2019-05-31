@@ -37,6 +37,7 @@ class App extends Component {
               fontSize: 25
              },
           }}
+          readOnly={true}
         />
         <STChart date={this.state.date} />
       </div>
